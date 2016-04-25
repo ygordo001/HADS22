@@ -9,6 +9,7 @@
     <style type="text/css">
         #form1 {
             width: 865px;
+            text-align: center;
         }
     </style>
 </head>
@@ -31,6 +32,9 @@
       
 
         </div>  
+        <br />
+          <asp:HyperLink ID="HyperLink1" runat="server" Font-Bold="True" Font-Underline="True" NavigateUrl="~/Logout.aspx" style="text-align: center">Cerrar Sesión</asp:HyperLink>
+   
     </form>
 </body>
 </html>
