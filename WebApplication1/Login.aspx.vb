@@ -11,20 +11,27 @@
 
     Protected Sub btnLogin_Click(sender As Object, e As EventArgs) Handles btnLogin.Click
         If businessLogic.existeUsuario(textEmail.Text, TextPassword.Text) = True Then
-            If textEmail.Text.Contains("ikasle") = False Then 'ES profesor
+            If textEmail.Text.Contains("vadillo@ehu") = True Then 'ES coordinador
                 consola.Text = "Usuario logeado correctamente"
                 Session("Email") = textEmail.Text
                 Application("cantidadP") = Application("cantidadP") + 1
                 Application("ProfesoresO").Add(Session("Email"), Session("Email"))
                 FormsAuthentication.SetAuthCookie("Profesor", False)
-                Response.Redirect("~/Profesor/Profesor.aspx")
-            ElseIf textEmail.Text.Contains("ikasle") = True Then
+                Response.Redirect("~/Coordinador/Coordinador.aspx")
+            ElseIf textEmail.Text.Contains("ikasle") = True Then 'ES alumno
                 consola.Text = "Usuario logeado correctamente"
                 Session("Email") = textEmail.Text
                 Application("cantidadA") = Application("cantidadA") + 1
                 Application("AlumnosO").Add(Session("Email"), Session("Email"))
                 FormsAuthentication.SetAuthCookie("Alumno", False)
                 Response.Redirect("~/Alumno/Alumno.aspx")
+            ElseIf textEmail.Text.Contains("ikasle") = False Then 'ES profesor
+                consola.Text = "Usuario logeado correctamente"
+                Session("Email") = textEmail.Text
+                Application("cantidadP") = Application("cantidadP") + 1
+                Application("ProfesoresO").Add(Session("Email"), Session("Email"))
+                FormsAuthentication.SetAuthCookie("Profesor", False)
+                Response.Redirect("~/Profesor/Profesor.aspx")
             Else
                 consola.Text = "No existe la cuenta"
             End If

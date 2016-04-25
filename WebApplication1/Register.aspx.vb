@@ -1,6 +1,8 @@
 ﻿Public Class WebForm2
     Inherits System.Web.UI.Page
     Dim businessLogic As New BusinessLogic.AccesManagerDB
+    Dim matricula As New ServicioMatricula.Matriculas
+
 
     Protected Sub Page_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
         If (Not IsPostBack) Then
@@ -18,19 +20,29 @@
 
 
     Protected Sub btnRegistrarse_Click(sender As Object, e As EventArgs) Handles btnRegistrarse.Click
-        If Not businessLogic.existeEmail(textEmail.Text) Then
+        If Page.IsValid Then
+            If Not businessLogic.existeEmail(textEmail.Text) Then
 
-            If businessLogic.insertarUsuario(textNombre.Text, textEmail.Text, textPassword.Text, TextDNI.Text, preguntas.SelectedIndex, respuesta.Text, textGrupo.Text) Then
-                consola.Text = "Cuenta creada correctamente."
+                If businessLogic.insertarUsuario(textNombre.Text, textEmail.Text, textPassword.Text, TextDNI.Text, preguntas.SelectedIndex, respuesta.Text, textGrupo.Text) Then
+                    consola.Text = "Cuenta creada correctamente."
+                Else
+                    consola.Text = "Imposible registrar el usuario indicado, fallo con la base de datos, por favor intentelo más tarde."
+                End If
             Else
-                consola.Text = "Imposible registrar el usuario indicado, fallo con la base de datos, por favor intentelo más tarde."
+                consola.Text = "El email introducido ya existe"
             End If
-        Else
-            consola.Text = "El email introducido ya existe"
         End If
     End Sub
 
     Protected Sub DropDownList1_SelectedIndexChanged(sender As Object, e As EventArgs) Handles preguntas.SelectedIndexChanged
 
+    End Sub
+
+    Protected Sub CustomValidator1_ServerValidate(source As Object, args As ServerValidateEventArgs) Handles ValidacionMatriculado.ServerValidate
+        If (matricula.comprobar(textEmail.Text) = "SI") Then
+            args.IsValid = True
+        Else
+            args.IsValid = False
+        End If
     End Sub
 End Class

@@ -141,6 +141,8 @@
         <asp:RequiredFieldValidator ID="RequiredFieldValidator2" runat="server" ControlToValidate="textEmail" ErrorMessage="No puede estar vacio" ForeColor="Red"></asp:RequiredFieldValidator>
                     <br />
         <asp:RegularExpressionValidator ID="RegularExpressionValidator1" runat="server" ControlToValidate="textEmail" ErrorMessage="Email incorrecto" ForeColor="Red" ValidationExpression="\w+([-+.']\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*"></asp:RegularExpressionValidator>
+                    <br />
+                    <asp:CustomValidator ID="ValidacionMatriculado" runat="server" ErrorMessage="Email no matriculado" ForeColor="Red"></asp:CustomValidator>
                 </td>
                 <td class="auto-style19">Grupo:</td>
                 <td class="auto-style15">
@@ -200,6 +202,9 @@
                 <td class="auto-style28">&nbsp;</td>
                 <td class="auto-style14" colspan="2">
                     <asp:Button ID="btnRegistrarse" runat="server" BorderStyle="Outset" BorderWidth="3px" Font-Bold="True" Text="Registrarse" Width="184px" style="height: 26px" />
+                    <br />
+          <asp:HyperLink ID="HyperLink1" runat="server" Font-Bold="True" Font-Underline="True" NavigateUrl="~/Login.aspx" style="text-align: center">Iniciar Sesión</asp:HyperLink>
+   
                 </td>
                 <td class="auto-style15">&nbsp;</td>
                 <td class="auto-style21">&nbsp;</td>
